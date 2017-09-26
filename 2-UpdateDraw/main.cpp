@@ -5,6 +5,8 @@
 #include "Player.h"
 #include "Shapes.h"
 
+#include <string>
+
 int main()
 {
 	// Create a window and a drawing context
@@ -55,10 +57,17 @@ int main()
 
 	rect.topRightX = 200;
 	rect.topRightY = 300;
-
+	float mins = 5;
+	mins *= 60;
 	// Set up the game loop
 	while (sfw::stepContext())
 	{
+		float dt = sfw::getDeltaTime();
+		mins -= dt;
+
+		int minutes = mins / 60;
+		int seconds = fmod(mins, 60);
+
 		// game code goes here
 		//sfw::drawCircle(400, 300, 70);
 		//rect.draw();
@@ -71,8 +80,15 @@ int main()
 
 		me.update();
 		//me.draw();
+		std::string minstring = std::to_string(minutes);
+		std::string secstring = std::to_string(seconds);
+		minstring.append(":");
+		minstring.append(secstring);
+		sfw::drawString(imgFont, "~Break~", 100, 550, 50, 50);
+		
+		//mins = 0;
+		sfw::drawString(imgFont, minstring.c_str(), 100, 500, 50, 50);
 
-		sfw::drawString(imgFont, "BREAK TIME", 100, 500, 50, 50);
 		sfw::drawTexture(imgKob, 400, 300, 300, 300, sfw::getTime() * 20);
 		sfw::drawTexture(imgTer, 200, 150, 150, 300);
 		sfw::drawTexture(imgTer, 600, 150, 150, 300);
