@@ -27,6 +27,26 @@ void Player::update()
 	{
 		x++;
 	}
+
+	if (x < 0)
+	{
+		x = 800;
+	}
+
+	if (x > 800)
+	{
+		x = 0;
+	}
+
+	if (y < 0)
+	{
+		y = 600;
+	}
+
+	if (y > 600)
+	{
+		y = 0;
+	}
 }
 
 void Player::draw()
